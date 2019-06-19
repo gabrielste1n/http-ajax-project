@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import "./FullPost.css";
-import { runInThisContext } from "vm";
+// import { runInThisContext } from "vm";
 import axios from "axios";
 
 class FullPost extends Component {
@@ -32,12 +32,16 @@ class FullPost extends Component {
           <h1>{this.state.loadedPost.title}</h1>
           <p>{this.state.loadedPost.body}</p>
           <div className="Edit">
-            <button className="Delete">Delete</button>
+            <button className="Delete" onClick={this.deletePostHandler}>Delete</button>
           </div>
         </div>
       );
     }
     return post;
+  }
+
+  deletePostHandler = () => {
+    axios.delete("https://jsonplaceholder.typicode.com/posts/" + this.props.id);
   }
 }
 
